@@ -1,4 +1,5 @@
 public class Player {
+
     //Information about player himself
     private String name;
     private int age;
@@ -23,5 +24,22 @@ public class Player {
         this.assist = assist;
     }
 
+    public String getName() { return name; }
+    public String getCountry() { return country; }
+    public String getPosition() { return position; }
+
+    public String getTeam() { return team; }
+    public void setTeam(String team) { this.team = team; }
+
+    public int getGoal() { return goal; }
+    public void setGoal(int goal) { this.goal = goal; }
+
+    public int getAssist() { return assist; }
+    public void setAssist(int assist) { this.assist = assist; }
+
+    public int getAttackPoint() { return goal + assist; }
+
+    public int getAge() { return age; }
+    public void setAge(int age) { this.age = age; }
 
 }
