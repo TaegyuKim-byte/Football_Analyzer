@@ -8,6 +8,7 @@ public class Team {
         this.name = name;
         players = new ArrayList<Player>();
     }
+
     public void addPlayer(Player player) {
         players.add(player);
     }
