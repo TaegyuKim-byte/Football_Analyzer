@@ -1,7 +1,20 @@
 import java.util.ArrayList;
 
-public class Team extends League{
+public class Team {
     private String name;
-    private String stadiumName;
     private ArrayList<Player> players;
+
+    public Team(String name) {
+        this.name = name;
+        players = new ArrayList<Player>();
+    }
+    public void addPlayer(Player player) {
+        players.add(player);
+    }
+
+    public void removePlayer(Player player) {
+        players.remove(player);
+    }
+
+
 }

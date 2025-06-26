@@ -7,14 +7,16 @@ public class Player {
 
     //information about soccer
     private String team; //Now, we just do simple task. few weeks later, it can be a class...
+    private int overall;
     private int goal;
     private int assist;
     private String position;
 
-    public Player(String name, int age, String country) {
+    public Player(String name, int age, String country, int overall) {
         this.name = name;
         this.age = age;
         this.country = country;
+        this.overall = overall;
     }
 
     public Player(String team, String position, int goal, int assist) {
@@ -37,10 +39,16 @@ public class Player {
     public int getAssist() { return assist; }
     public void setAssist(int assist) { this.assist = assist; }
 
+    public int getOverall() { return overall; }
+    public void setOverall(int overall) { this.overall = overall; }
+
     public int getAttackPoint() { return goal + assist; }
 
     public int getAge() { return age; }
     public void setAge(int age) { this.age = age; }
 
-    
+    @Override
+    public String toString() {
+        return (this.name + ", " + this.age + ", " + this.country + ": " + this.overall);
+    }
 }
