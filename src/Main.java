@@ -5,21 +5,35 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("=========[Welcome to the Soccer Analyzer!]=========");
-        System.out.println("Upload your player! (name \\n age \\n country \\n overall)");
+        FootballManager footballManager = new FootballManager();
 
         Scanner keyboard = new Scanner(System.in);
-        String playerName = keyboard.nextLine();
-        //Using nextLine after using nextInt/next..
-        //\n remains at input buffer!!!!
-        int playerAge = keyboard.nextInt();
-        String trash = keyboard.nextLine();
-        String playerCountry = keyboard.nextLine();
-        int playerOverall = keyboard.nextInt();
-        trash = keyboard.nextLine();
+        int enter;
+        boolean goon = true;
 
-        Player player1 = new Player(playerName, playerAge, playerCountry, playerOverall);
+        footballManager.addPlayerSet("players.txt");
 
-        System.out.println(player1);
+        System.out.println("-----등록된 선수 목록----");
+        for (Player p : footballManager.players) {
+            System.out.println(p.getName() + " / Age: " + p.getAge() + " / Country: " + p.getCountry());
+        }
+        /*
+        do {
+            System.out.println("_______________________________________");
+            System.out.println("Welcome to the Football Manager. choose your option");
+            System.out.println("(1) Add players to library collection from a text file");
+            System.out.println("(2) ");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
+
+
+        } while (goon);
+        */
     }
 }

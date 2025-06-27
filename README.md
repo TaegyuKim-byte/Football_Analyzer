@@ -12,3 +12,19 @@ What i want to do:
 5. Compare Team's average overall in same league
 
 So i divide player to forward, midfielder, back, goalkeeper
+
+250627
+But normal football simulator game like fm, usually give same type of 
+stat. So reset to Player (one class). Like fm, all abilities are in Player class.
+
+ALL ABILITIES LIST
+1. Physical skills
+pace 스피드 (속도 + 가속도), stamina 체력, strength, jumping, agility 민첩성
+2. 
+
+
+And I make **FootballManager class** to deal with player's, team's, league's interaction
+-> factory pattern!
+
+
+
