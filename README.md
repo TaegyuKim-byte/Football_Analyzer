@@ -20,11 +20,13 @@ stat. So reset to Player (one class). Like fm, all abilities are in Player class
 ALL ABILITIES LIST
 1. Physical skills
 pace 스피드 (속도 + 가속도), stamina 체력, strength, jumping, agility 민첩성
-2. 
+2. ...
 
 
 And I make **FootballManager class** to deal with player's, team's, league's interaction
 -> factory pattern!
+
+Last, FootballManager can read and register player('s info, ability) by players.txt -> chapter10. File I/O
 
 
 
