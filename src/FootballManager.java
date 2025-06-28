@@ -55,9 +55,8 @@ public class FootballManager {
                 p.setSaving(Integer.parseInt(tokens[22].trim()));
                 p.setBuildupPlay(Integer.parseInt(tokens[23].trim()));
 
-
                 players.add(p);
-                System.out.println("Player" + p.getName() +  " registered successfully!");
+                System.out.println("Player " + p.getName() +  " registered successfully!");
             }
         } catch (IOException e) {
             System.err.println("!! File read error: " + e.getMessage());

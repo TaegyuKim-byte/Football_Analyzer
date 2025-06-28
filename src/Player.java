@@ -3,7 +3,6 @@ public class Player {
     private String name;
     private int age;
     private String country;
-    private int overall;
 
     //Information about football skill
 
@@ -213,14 +212,4 @@ public class Player {
     public void setBuildupPlay(int buildupPlay) {
         this.buildupPlay = buildupPlay;
     }
-
-    public int getOverall() {
-        return overall;
-    }
-
-    public void setOverall(int overall) {
-        this.overall = overall;
-    }
-
-
 }
