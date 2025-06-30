@@ -43,6 +43,11 @@ Last, FootballManager can read and register player('s info, ability) by players.
 Fix Main method to use do-while loop, switch-case.
 (i want to use GUI, but to do it, many things have to change.. so i drop it)
 
+250630
+summarization each class's role and info by Notion
+there is planner that write what i did and what i have to do
+
+
 
 
 

@@ -212,4 +212,8 @@ public class Player {
     public void setBuildupPlay(int buildupPlay) {
         this.buildupPlay = buildupPlay;
     }
+
+    public void showPlayer() {
+
+    }
 }

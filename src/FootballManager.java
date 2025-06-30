@@ -14,7 +14,7 @@ public class FootballManager {
         leagues = new ArrayList<>();
     }
 
-    public void addPlayerSet(String inputFile) {
+    public void registerPlayerSet(String inputFile) {
         try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -22,7 +22,7 @@ public class FootballManager {
 
                 String[] tokens = line.split(",");
                 if (tokens.length != 24) {
-                    System.out.println("! Error of data form: " + line);
+                    System.out.println("[!] Error of data form: " + line);
                     continue;
                 }
 
@@ -63,5 +63,13 @@ public class FootballManager {
         }
     }
 
+    public void registerTeam(String teamName) {
+        Team team = new Team(teamName);
 
+
+    }
+
+    public void addLeague() {
+
+    }
 }
