@@ -40,6 +40,8 @@ public class Main {
                     String filename = keyboard.next();
 
                     footballManager.registerPlayerSet(filename);
+
+
                     break;
                 }
                 case 2: {

@@ -33,7 +33,7 @@ public class Team {
 
         for (Player player : players)
             //playerlist = playerlist + player.getName() + "\n"; -> make new obj every time.  less efficient
-            System.out.println(" - " + player.getName());
+            System.out.println(" - " + player);
     }
 
 
