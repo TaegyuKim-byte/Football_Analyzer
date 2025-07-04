@@ -47,8 +47,15 @@ Fix Main method to use do-while loop, switch-case.
 summarization each class's role and info by Notion
 there is planner that write what i did and what i have to do
 
+250704
+1. 포지션별 선호도 계산 로직 구현
+   1-1. 선호 포지션을 능력치에 반영 (players.txt에서 입력받음)
+   1-2. 좌/우 가 주발에 영향을 받는 포지션(풀백, 윙어)은 따로 구현
+   1-3. 풀백은 정발이 대부분.
+   1-4. 윙어는 선호 포지션으로 구분
 
+추후에 그냥 모든 포지션을 선호 포지션을 통해 일괄 처리할 가능성 있음
 
-
+2. toString(), showPlayer()(임시) 구현
 
 
