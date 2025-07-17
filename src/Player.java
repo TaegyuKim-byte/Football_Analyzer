@@ -9,6 +9,8 @@ public class Player {
 
     //Information about football skill
 
+    private String teamName;
+
     //Preferred Position
     private Position preferredPosition;
 
@@ -59,9 +61,15 @@ public class Player {
     public int getAge() { return this.age; }
     public String getCountry() { return this.country; }
 
+    public String getTeam() { return teamName; }
+
+    public void setTeam(String teamName) { this.teamName = teamName; }
+
     public Position getPreferredPosition() { return preferredPosition; }
 
-    public void setPreferredPosition(Position preferredPosition) { this.preferredPosition = preferredPosition; }
+    public void setPreferredPosition(Position preferredPosition) {
+        this.preferredPosition = preferredPosition;
+    }
 
     public int getLeftFoot() { return leftFoot; }
 
@@ -235,21 +243,48 @@ public class Player {
         return buildupPlay;
     }
 
-    public void setBuildupPlay(int buildupPlay) {
-        this.buildupPlay = buildupPlay;
+    public void setBuildupPlay(int buildupPlay) { this.buildupPlay = buildupPlay; }
+
+    //포지션 적합도가 담긴 EnumMap 반환
+    public EnumMap<Position, Double> getPositionFitEnumMap() {
+        return this.positionFitEnumMap;
     }
 
+    //단일 포지션 적합도 반환
+    public double getSinglePositionFit(Position pos) {
+        if (this.positionFitEnumMap.isEmpty()) calculateAllFit();
+        return this.positionFitEnumMap.getOrDefault(pos, 0.0);
+    }
 
+    //단일 선수 검색(분석) 시 사용
     public void showPlayer() {
         System.out.println("=== Player Info ===");
         System.out.println("Name: " + name + " (" + age + ", " + country + ")");
         System.out.println("Foot: L" + leftFoot + " / R" + rightFoot);
-        System.out.println("--- Position Fit Scores ---");
 
-        for (Position pos : Position.values()) {
-            double fitScore = positionFitEnumMap.getOrDefault(pos, 0.0);
-            System.out.printf(" %s: %.2f\n", pos, fitScore);
-        }
+        System.out.println("--- Technical Skills ---");
+        System.out.println("Shooting: " + shooting + " | Passing: " + passing + " | Dribbling: " + dribbling);
+        System.out.println("Crossing: " + crossing + " | Tackling: " + tackling + " | Heading: " + heading);
+        System.out.println("Ball Control: " + ballControl);
+
+        System.out.println("--- Mental Skills ---");
+        System.out.println("Vision: " + vision + " | Composure: " + composure + " | Decision Making: " + decisionMaking);
+        System.out.println("Work Rate: " + workRate + " | Leadership: " + leadership);
+        System.out.println("Positioning: " + positioning + " | Off The Ball: " + offTheBall);
+
+        System.out.println("--- Physical Skills ---");
+        System.out.println("Pace: " + pace + " | Stamina: " + stamina + " | Strength: " + strength);
+        System.out.println("Jumping: " + jumping + " | Agility: " + agility);
+
+        System.out.println("--- Goalkeeper Skills ---");
+        System.out.println("Saving: " + saving + " | Buildup Play: " + buildupPlay);
+
+        System.out.println("--- Top 3 Position Fit Scores ---");
+        // 포지션 적합도를 내림차순으로 정렬하여 상위 3개 출력
+        positionFitEnumMap.entrySet().stream()
+                .sorted((e1, e2) -> Double.compare(e2.getValue(), e1.getValue()))
+                .limit(3)
+                .forEach(entry -> System.out.printf(" %s: %.2f\n", entry.getKey(), entry.getValue()));
     }
 
     public void calculateAllFit() {
@@ -262,6 +297,7 @@ public class Player {
         }
     }
 
+    //전술 트렌드에 따라 변경 가능
     public double getFootMultiplier(Position pos, boolean isInverted) {
         int footScore;
 
@@ -345,7 +381,8 @@ public class Player {
         }
     }
 
+    //팀 검색 시 구성원으로서의 출력 시 사용
     public String toString() {
-        return (this.name + "(" + this.age + ", " + this.country + ")");
+        return (this.name + "(" + this.age + ", " + this.country + "," + this.preferredPosition + ")");
     }
 }

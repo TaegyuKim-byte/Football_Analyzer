@@ -17,10 +17,9 @@ public class Main {
             System.out.println("==========================================");
             System.out.println("Choose your option:");
             System.out.println("------------------------------------------");
-            System.out.println("(1) Register Players from text File");
-            System.out.println("(2) Register Team and Assign Players");
-            System.out.println("(3) Register League and Assign Teams");
-            System.out.println("(4) Search");
+            System.out.println("(1) Load Data from text File");
+            System.out.println("(2) Search & View");
+            System.out.println("(3) Analysis");
             /*System.out.println("(4) Show all Players in this world");
             System.out.println("(5) Show all Players in the Team");
             System.out.println("(6) Show all Teams in this world");
@@ -40,36 +39,15 @@ public class Main {
                     String filename = keyboard.next();
 
                     footballManager.registerPlayerSet(filename);
+                    footballManager.registerTeam();
+                    footballManager.assignPlayerToTeam();
 
+                    footballManager.showAllPlayers();
+                    footballManager.showAllTeams();
 
                     break;
                 }
                 case 2: {
-                    System.out.println("Enter TEAM NAME what you want to register");
-                    String teamname = keyboard.next();
-
-                    footballManager.registerTeam(teamname);
-
-                    System.out.println("Enter the name of the players you want to assign to " + teamname + ".");
-                    System.out.println("(separated by commas)");
-
-                    String[] tokens = keyboard.nextLine().split(",");
-
-                    for (String playerName : tokens) {
-                        for (Player player : footballManager.players) {
-                            if (player.getName().equals(playerName)) {
-
-                            }
-                        }
-                    }
-
-                    break;
-                }
-                case 3: {
-                    //We will write here soon..
-                    break;
-                }
-                case 4: {
                     System.out.println("----- Search Options -----");
                     System.out.println("(1) Players");
                     System.out.println("(2) Teams");
@@ -87,11 +65,21 @@ public class Main {
                             int subChoice1 = keyboard.nextInt();
 
                             switch (subChoice1) {
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 0:
-                                default:
+                                case 1: {
+                                    break;
+                                }
+                                case 2: {
+                                    break;
+                                }
+                                case 3: {
+                                    break;
+                                }
+                                case 0: {
+                                    break;
+                                }
+                                default: {
+                                    break;
+                                }
                             }
                         }
                         case 2: {
@@ -131,13 +119,8 @@ public class Main {
 
                         }
                     }
-                    break;
                 }
-                case 5: {
-                    //We will write here soon..
-                    break;
-                }
-                case 6: {
+                case 3: {
                     //We will write here soon..
                     break;
                 }

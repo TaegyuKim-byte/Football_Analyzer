@@ -14,6 +14,56 @@ public class FootballManager {
         leagues = new ArrayList<>();
     }
 
+    public ArrayList<League> getLeagues() {
+        return leagues;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public ArrayList<Team> getTeams() {
+        return teams;
+    }
+
+    public void showAllPlayers() {
+        if (players.isEmpty()) {
+            System.out.println("[!] No players registered.");
+            return;
+        }
+
+        System.out.println("=== All Players ===");
+        for (Player p : players) {
+            System.out.println(" - " + p); // toString() 기준
+        }
+    }
+
+    public void showAllTeams() {
+        if (teams.isEmpty()) {
+            System.out.println("[!] No teams registered.");
+            return;
+        }
+
+        System.out.println("=== All Teams ===");
+        for (Team t : teams) {
+            //t.showPlayers();
+            System.out.println(" - " + t.getName());
+        }
+    }
+
+    public void showAllLeagues() {
+        if (leagues.isEmpty()) {
+            System.out.println("[!] No leagues registered.");
+            return;
+        }
+
+        System.out.println("=== All Leagues ===");
+        for (League l : leagues) {
+            System.out.println(" - " + l.getName());
+        }
+    }
+
+
     public void registerPlayerSet(String inputFile) {
         try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
             String line;
@@ -21,7 +71,7 @@ public class FootballManager {
                 if (line.trim().isEmpty()) continue; //빈 줄 무시 (trim: 공백 무시)
 
                 String[] tokens = line.split(",");
-                if (tokens.length != 27) {
+                if (tokens.length != 28) {
                     System.out.println("[!] Error of data form: " + line);
                     continue;
                 }
@@ -33,6 +83,8 @@ public class FootballManager {
 
                 Player p = new Player(name, age, country);
 
+                //if there is blank or lower case on textfile,
+                //IllegalArgumentException occur
                 p.setPreferredPosition(Position.valueOf(tokens[3].trim()));
 
                 p.setLeftFoot(Integer.parseInt(tokens[4].trim()));
@@ -59,7 +111,7 @@ public class FootballManager {
                 p.setAgility(Integer.parseInt(tokens[24].trim()));
                 p.setSaving(Integer.parseInt(tokens[25].trim()));
                 p.setBuildupPlay(Integer.parseInt(tokens[26].trim()));
-
+                p.setTeam(tokens[27].trim());
                 p.calculateAllFit();
 
                 players.add(p);
@@ -72,13 +124,43 @@ public class FootballManager {
         }
     }
 
-    public void registerTeam(String teamName) {
-        Team team = new Team(teamName);
+    //이미 등록된 선수 리스트를 돌면서 각 선수의 팀을 팀 리스트에 등록
+    public void registerTeam() {
+        boolean exists;
+        for (Player player : players) {
+            String teamName = player.getTeam().trim();
+            exists = teams.stream().anyMatch(t -> t.getName().equalsIgnoreCase(teamName));
+            if (!exists) {
+                teams.add(new Team(teamName));
+            }
+        }
+    }
 
+    public void registerLeague() {
 
     }
 
-    public void addLeague() {
+    public void assignPlayerToTeam() {
+        for (Player player : players) {
+            Team team = findTeamByName(player.getTeam());
+            if (team != null) {
+                team.addPlayer(player);
+            } else {
+                System.out.println("[!] There is no team for " + player.getName());
+            }
+        }
+    }
+
+    public Team findTeamByName(String name) {
+        for (Team t : teams) {
+            if (t.getName().equalsIgnoreCase(name)) {
+                return t;
+            }
+        }
+        return null;
+    }
+
+    public void assignTeamToLeague() {
 
     }
 }
