@@ -160,6 +160,15 @@ public class FootballManager {
         return null;
     }
 
+    public Player findPlayerByName(String name) {
+        for (Player p : players) {
+            if (p.getName().equalsIgnoreCase(name)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
     public void assignTeamToLeague() {
 
     }

@@ -383,6 +383,6 @@ public class Player {
 
     //팀 검색 시 구성원으로서의 출력 시 사용
     public String toString() {
-        return (this.name + "(" + this.age + ", " + this.country + "," + this.preferredPosition + ")");
+        return (this.name + "(" + this.age + ", " + this.country + ", " + this.preferredPosition + ")");
     }
 }

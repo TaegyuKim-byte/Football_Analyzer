@@ -52,7 +52,6 @@ public class Main {
                     System.out.println("(1) Players");
                     System.out.println("(2) Teams");
                     System.out.println("(3) Leagues");
-                    System.out.println("(0) Back");
                     int subChoice = keyboard.nextInt();
 
                     switch (subChoice) {
@@ -61,10 +60,57 @@ public class Main {
                             System.out.println("(1) View All Players");
                             System.out.println("(2) View Players in a Team");
                             System.out.println("(3) View One Player by name");
-                            System.out.println("(0) Back");
                             int subChoice1 = keyboard.nextInt();
+                            keyboard.nextLine();
+                            //개행문자 제거
 
                             switch (subChoice1) {
+                                case 1: {
+                                    footballManager.showAllPlayers();
+                                    break;
+                                }
+                                case 2: {
+                                    System.out.println("Choose a team.");
+                                    footballManager.showAllTeams();
+
+                                    String teamName = keyboard.nextLine();
+
+                                    Team team = footballManager.findTeamByName(teamName);
+
+                                    team.showPlayers();
+
+                                    break;
+                                }
+                                case 3: {
+                                    footballManager.showAllPlayers();
+                                    System.out.print("Enter the player's name: ");
+
+                                    String playerName = keyboard.nextLine();
+
+                                    Player p = footballManager.findPlayerByName(playerName);
+                                    if (p == null) {
+                                        System.out.println("[!] There is no player whose name is " + playerName);
+                                    } else {
+                                        p.showPlayer();
+                                    }
+
+                                    break;
+                                }
+                                default: {
+                                    System.out.println("[!] Invalid input. Please enter a number between 1 and 3.");
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                        case 2: {
+                            System.out.println("----- Team Search Options -----");
+                            System.out.println("(1) View All Teams");
+                            System.out.println("(2) View Teams in a League");
+                            System.out.println("(3) View One Team by name");
+                            int subChoice2 = keyboard.nextInt();
+
+                            switch (subChoice2) {
                                 case 1: {
                                     break;
                                 }
@@ -74,51 +120,39 @@ public class Main {
                                 case 3: {
                                     break;
                                 }
-                                case 0: {
-                                    break;
-                                }
                                 default: {
+                                    System.out.println("[!] Invalid input. Please choose between 1 and 3.");
                                     break;
                                 }
                             }
-                        }
-                        case 2: {
-                            System.out.println("----- Team Search Options -----");
-                            System.out.println("(1) View All Teams");
-                            System.out.println("(2) View Teams in a League");
-                            System.out.println("(3) View One Team by name");
-                            System.out.println("(0) Back");
-                            int subChoice2 = keyboard.nextInt();
-
-                            switch (subChoice2) {
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 0:
-                                default:
-                            }
+                            break;
                         }
                         case 3: {
                             System.out.println("----- League Search Options -----");
                             System.out.println("(1) View All Leagues");
                             System.out.println("(2) View One League by name");
-                            System.out.println("(0) Back");
                             int subChoice3 = keyboard.nextInt();
 
                             switch (subChoice3) {
-                                case 1:
-                                case 2:
-                                case 0:
-                                default:
+                                case 1: {
+                                    break;
+                                }
+                                case 2: {
+                                    break;
+                                }
+                                default: {
+                                    System.out.println("[!] Invalid input. Please choose between 1 and 2.");
+                                    break;
+                                }
                             }
-                        }
-                        case 0: {
-
+                            break;
                         }
                         default: {
-
+                            System.out.println("[!] Invalid input. Please choose between 1 and 3.");
+                            break;
                         }
                     }
+                    break;
                 }
                 case 3: {
                     //Part of analyzer
@@ -129,11 +163,9 @@ public class Main {
                     goon = false;
                     break;
                 default:
-                    System.out.println("Invalid input. Please choose between 0 to 5.");
+                    System.out.println("[!] Invalid input. Please choose between 0 and 3.");
                     break;
             }
-
-
         } while (goon);
 
     }
