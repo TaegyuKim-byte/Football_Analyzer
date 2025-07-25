@@ -117,7 +117,7 @@ public class FootballManager {
                 players.add(p);
                 System.out.println("Player " + p.getName() +  " registered successfully!");
 
-                p.showPlayer();
+                //p.showPlayer();
             }
         } catch (IOException e) {
             System.err.println("!! File read error: " + e.getMessage());
