@@ -8,10 +8,16 @@ public class FootballManager {
     ArrayList<Team> teams;
     ArrayList<League> leagues;
 
+    private PlayerAnalyzer playerAnalyzer;
+    private TeamAnalyzer teamAnalyzer;
+
     public FootballManager() {
         players = new ArrayList<>();
         teams = new ArrayList<>();
         leagues = new ArrayList<>();
+
+        playerAnalyzer = new PlayerAnalyzer();
+        teamAnalyzer = new TeamAnalyzer();
     }
 
     public ArrayList<League> getLeagues() {
@@ -172,4 +178,6 @@ public class FootballManager {
     public void assignTeamToLeague() {
 
     }
+
+    //Analyzer들을 실행하기 위한 FM의 메서드도 만들어줘야 함.
 }

@@ -52,7 +52,10 @@ public class Main {
                     System.out.println("(1) Players");
                     System.out.println("(2) Teams");
                     System.out.println("(3) Leagues");
+                    System.out.println("(0) Back to Main Menu");
                     int subChoice = keyboard.nextInt();
+                    keyboard.nextLine();
+                    //개행문자 제거
 
                     switch (subChoice) {
                         case 1: {
@@ -60,6 +63,7 @@ public class Main {
                             System.out.println("(1) View All Players");
                             System.out.println("(2) View Players in a Team");
                             System.out.println("(3) View One Player by name");
+                            System.out.println("(0) Back to Main Menu");
                             int subChoice1 = keyboard.nextInt();
                             keyboard.nextLine();
                             //개행문자 제거
@@ -96,6 +100,9 @@ public class Main {
 
                                     break;
                                 }
+                                case 0: {
+                                    break;
+                                }
                                 default: {
                                     System.out.println("[!] Invalid input. Please enter a number between 1 and 3.");
                                     break;
@@ -106,18 +113,30 @@ public class Main {
                         case 2: {
                             System.out.println("----- Team Search Options -----");
                             System.out.println("(1) View All Teams");
-                            System.out.println("(2) View Teams in a League");
-                            System.out.println("(3) View One Team by name");
+                            System.out.println("(2) View One Team by name");
+                            System.out.println("(0) Back to Main Menu");
                             int subChoice2 = keyboard.nextInt();
+                            keyboard.nextLine();
+                            //개행문자 제거
 
                             switch (subChoice2) {
                                 case 1: {
+                                    footballManager.showAllTeams();
                                     break;
                                 }
                                 case 2: {
+                                    footballManager.showAllTeams();
+                                    System.out.print("Enter the team's name: ");
+                                    String teamName = keyboard.nextLine();
+                                    Team team = footballManager.findTeamByName(teamName);
+                                    if (team == null) {
+                                        System.out.println("[!] There is no team whose name is " + teamName);
+                                    } else {
+                                        team.showPlayers();
+                                    }
                                     break;
                                 }
-                                case 3: {
+                                case 0: {
                                     break;
                                 }
                                 default: {
@@ -131,7 +150,10 @@ public class Main {
                             System.out.println("----- League Search Options -----");
                             System.out.println("(1) View All Leagues");
                             System.out.println("(2) View One League by name");
+                            System.out.println("(0) Back to Main Menu");
                             int subChoice3 = keyboard.nextInt();
+                            keyboard.nextLine();
+                            //개행문자 제거
 
                             switch (subChoice3) {
                                 case 1: {
@@ -140,11 +162,17 @@ public class Main {
                                 case 2: {
                                     break;
                                 }
+                                case 0: {
+                                    break;
+                                }
                                 default: {
                                     System.out.println("[!] Invalid input. Please choose between 1 and 2.");
                                     break;
                                 }
                             }
+                            break;
+                        }
+                        case 0: {
                             break;
                         }
                         default: {
@@ -156,15 +184,99 @@ public class Main {
                 }
                 case 3: {
                     //Part of analyzer
+                    boolean analysisContinue = true;
+                    while (analysisContinue) { 
+                        System.out.println("----- Analysis Options -----");
+                        System.out.println("(1) Player Analysis");
+                        System.out.println("(2) Team Analysis");
+                        System.out.println("(0) Back to Main Menu");
+                        int analysisChoice = keyboard.nextInt();
+                        keyboard.nextLine();
+                        //개행문자 제거
+                       
+                        switch (analysisChoice) {
+                            case 1: {
+                                System.out.println("----- Player Analysis Options -----");
+                                System.out.println("(1) Player Comparison");
+                                System.out.println("(2) Ranking Top N");
+                                System.out.println("(3) Position-based Analysis");
+                                System.out.println("(0) Back to Analysis Menu");
+                                int playerAnalysisChoice = keyboard.nextInt();
+                                keyboard.nextLine();
+                                //개행문자 제거
+
+                                //PlayerAnalyzer class 사용 
+                                switch (playerAnalysisChoice) {
+                                    case 1: {
+                                        break;
+                                    }
+                                    case 2: {
+                                        break;
+                                    }
+                                    case 3: {
+                                        break;
+                                    }
+                                    case 0: {
+                                        break;
+                                    }
+                                    default: {
+                                        System.out.println("[!] Invalid input. Please choose between 1 and 3.");
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            case 2: {
+                                //Team Analysis
+                                System.out.println("----- Team Analysis Options -----");
+                                System.out.println("(1) Best 11 Auto Formation");
+                                System.out.println("(2) Team Average Stats");
+                                System.out.println("(3) Formation Suitability");
+                                System.out.println("(0) Back to Analysis Menu");
+                                int teamAnalysisChoice = keyboard.nextInt();
+                                keyboard.nextLine();
+
+                                switch (teamAnalysisChoice) {
+                                    case 1: {
+                                        
+                                    } 
+                                    case 2: {
+
+                                    }
+                                    case 3: {
+
+                                    }
+                                    case 0: {
+                                        break;
+                                    }
+                                    default: {
+                                        System.out.println("[!] Invalid input. Please choose between 1 and 3.");
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            case 0: {
+                                analysisContinue = false;
+                                break;
+                            }         
+                            default: {
+                                System.out.println("[!] Invalid input. Please choose between 1 and 2.");
+                                break;
+                            }
+                        }
+                    }
                     break;
                 }
-                case 0:
+                case 0: {
                     System.out.println("Exit program..");
                     goon = false;
                     break;
-                default:
+                }
+                default: {
                     System.out.println("[!] Invalid input. Please choose between 0 and 3.");
                     break;
+                }
             }
         } while (goon);
 
