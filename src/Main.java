@@ -196,11 +196,7 @@ public class Main {
                        
                         switch (analysisChoice) {
                             case 1: {
-                                System.out.println("----- Player Analysis Options -----");
-                                System.out.println("(1) Player Comparison");
-                                System.out.println("(2) Ranking Top N");
-                                System.out.println("(3) Position-based Analysis");
-                                System.out.println("(0) Back to Analysis Menu");
+                                footballManager.playerAnalyzer.showMenu();
                                 int playerAnalysisChoice = keyboard.nextInt();
                                 keyboard.nextLine();
                                 //개행문자 제거
@@ -208,9 +204,27 @@ public class Main {
                                 //PlayerAnalyzer class 사용 
                                 switch (playerAnalysisChoice) {
                                     case 1: {
+                                        footballManager.showAllPlayers();
+                                        System.out.println("------------------------------------------");
+                                        System.out.println("Enter the first player's name: ");
+                                        String player1Name = keyboard.nextLine();
+                                        Player player1 = footballManager.findPlayerByName(player1Name);
+                                        if (player1 == null) {
+                                            System.out.println("[!] There is no player whose name is " + player1Name);
+                                        }
+                                        
+                                        System.out.println("Enter the second player's name: ");
+                                        String player2Name = keyboard.nextLine();
+                                        Player player2 = footballManager.findPlayerByName(player2Name);
+                                        if (player2 == null) {
+                                            System.out.println("[!] There is no player whose name is " + player2Name);
+                                        }
+
+                                        footballManager.playerAnalyzer.playerComparison(player1, player2);
                                         break;
                                     }
                                     case 2: {
+
                                         break;
                                     }
                                     case 3: {

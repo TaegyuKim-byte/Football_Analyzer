@@ -18,34 +18,34 @@ public class Player {
     private int leftFoot;
     private int rightFoot;
 
-    //Technical Skills
-    private int shooting;
-    private int passing;
-    private int dribbling;
-    private int crossing;
-    private int tackling;
-    private int heading;
-    private int ballControl;
+    //Technical Skills //FM 2025 stats name
+    private int shooting; //finishing
+    private int passing; //passing
+    private int dribbling; // dribbling
+    private int crossing; //crossing
+    private int tackling; //tackling
+    private int heading; //heading
+    private int ballControl; //ball control
 
-    //Mental Skills
-    private int vision;
-    private int composure; //침착성
-    private int decisionMaking;
-    private int workRate; //활동량, 헌신성
-    private int leadership;
-    private int positioning;
-    private int offTheBall;
+    //Mental Skills //FM 2025 stats name
+    private int vision; //vision
+    private int composure; //침착성 //composure
+    private int decisionMaking; //decisions
+    private int workRate; //활동량, 헌신성 //work rate
+    private int leadership; //leadership
+    private int positioning; //positioning
+    private int offTheBall; //off the ball
 
-    //Physical Skills
-    private int pace; //스피드 (속도 + 가속도)
-    private int stamina; //체력
-    private int strength;
-    private int jumping;
-    private int agility; //민첩성 (턴, 회피 등)
+    //Physical Skills //FM 2025 stats name
+    private int pace; //스피드 (속도 + 가속도) //pace
+    private int stamina; //체력 //stamina
+    private int strength; //strength
+    private int jumping; //jumping reach
+    private int agility; //민첩성 (턴, 회피 등) //agility
 
-    //GK 전용
-    private int saving;
-    private int buildupPlay;
+    //GK 전용 //FM 2025 stats name
+    private int saving; //Average of Aerial Reach + Handling + Reflexes + One-on-One + Rushing Out
+    private int buildupPlay; //Average of Kicking + First Touch + Passing + Throwing
 
     private EnumMap<Position, Double> positionFitEnumMap;
 
@@ -313,9 +313,26 @@ public class Player {
                 footScore = isInverted ? rightFoot : leftFoot;
                 break;
             }
-            case LB:
+            case LB: {
                 footScore = leftFoot;
                 break;
+            }
+            case RM: {
+                footScore = isInverted ? leftFoot : rightFoot;
+                break;
+            }
+            case LM: {
+                footScore = isInverted ? rightFoot : leftFoot;
+                break;
+            }
+            case LWB: {
+                footScore = leftFoot;
+                break;
+            }
+            case RWB: {
+                footScore = rightFoot;
+                break;
+            }
             default:
                 return 1.0; // 중앙 포지션 등은 보정 없음
         }
@@ -362,6 +379,24 @@ public class Player {
             case CDM: {
                 return tackling * 0.4 + positioning * 0.3 + strength * 0.2 + passing * 0.1;
             }
+            case LM: {
+                base = crossing * 0.35 + passing * 0.25 + stamina * 0.2 + workRate * 0.15 + pace * 0.05;
+                double notInverted = getFootMultiplier(Position.LM, false) * base; // 정발 (크로스 중심)
+    
+                base = passing * 0.3 + shooting * 0.25 + offTheBall * 0.2 + composure * 0.15 + agility * 0.1;
+                double inverted = getFootMultiplier(Position.LM, true) * base; // 역발 (안쪽 슈팅)
+    
+                return Math.max(inverted, notInverted);
+            }
+            case RM: {
+                base = crossing * 0.35 + passing * 0.25 + stamina * 0.2 + workRate * 0.15 + pace * 0.05;
+                double notInverted = getFootMultiplier(Position.RM, false) * base; // 정발 (크로스 중심)
+    
+                base = passing * 0.3 + shooting * 0.25 + offTheBall * 0.2 + composure * 0.15 + agility * 0.1;
+                double inverted = getFootMultiplier(Position.RM, true) * base; // 역발 (안쪽 슈팅)
+    
+                return Math.max(inverted, notInverted);
+            }
             case RB: {
                 base = tackling * 0.3 + pace * 0.3 + crossing * 0.2 + stamina * 0.2;
                 return base * getFootMultiplier(Position.RB, false);
@@ -372,6 +407,14 @@ public class Player {
             }
             case CB: {
                 return tackling * 0.4 + heading * 0.3 + strength * 0.2 + positioning * 0.1;
+            }
+            case LWB: { 
+                base = crossing * 0.3 + tackling * 0.25 + pace * 0.2 + stamina * 0.15 + passing * 0.1;
+                return base * getFootMultiplier(Position.LWB, false);
+            }
+            case RWB: {
+                base = crossing * 0.3 + tackling * 0.25 + pace * 0.2 + stamina * 0.15 + passing * 0.1;
+                return base * getFootMultiplier(Position.RWB, false);
             }
             case GK: {
                 return saving * 0.5 + positioning * 0.2 + buildupPlay * 0.2 + jumping * 0.1;

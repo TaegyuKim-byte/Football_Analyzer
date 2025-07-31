@@ -8,8 +8,8 @@ public class FootballManager {
     ArrayList<Team> teams;
     ArrayList<League> leagues;
 
-    private PlayerAnalyzer playerAnalyzer;
-    private TeamAnalyzer teamAnalyzer;
+    public PlayerAnalyzer playerAnalyzer;
+    public TeamAnalyzer teamAnalyzer;
 
     public FootballManager() {
         players = new ArrayList<>();
