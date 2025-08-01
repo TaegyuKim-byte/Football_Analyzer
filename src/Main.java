@@ -207,30 +207,48 @@ public class Main {
                                         footballManager.showAllPlayers();
                                         System.out.println("------------------------------------------");
                                         System.out.println("Enter the first player's name: ");
-                                        String player1Name = keyboard.nextLine();
-                                        Player player1 = footballManager.findPlayerByName(player1Name);
-                                        if (player1 == null) {
-                                            System.out.println("[!] There is no player whose name is " + player1Name);
+                                        String player1Name = null;
+                                        Player player1 = null;
+                                        //String player1Name = keyboard.nextLine();
+                                        //Player player1 = footballManager.findPlayerByName(player1Name);
+                                        //if (player1 == null) {
+                                        //    System.out.println("[!] There is no player whose name is " + player1Name);
+                                        //}
+                                        while (player1 == null) { 
+                                            player1Name = keyboard.nextLine();
+                                            player1 = footballManager.findPlayerByName(player1Name);
+                                            if (player1 == null) {
+                                                System.out.println("[!] There is no player whose name is " + player1Name);
+                                            }
                                         }
+
                                         
                                         System.out.println("Enter the second player's name: ");
-                                        String player2Name = keyboard.nextLine();
-                                        Player player2 = footballManager.findPlayerByName(player2Name);
-                                        if (player2 == null) {
-                                            System.out.println("[!] There is no player whose name is " + player2Name);
+                                        String player2Name = null;
+                                        Player player2 = null;
+                                        while (player2 == null) { 
+                                            player2Name = keyboard.nextLine();
+                                            player2 = footballManager.findPlayerByName(player2Name);
+                                            if (player2 == null) {
+                                                System.out.println("[!] There is no player whose name is " + player2Name);
+                                            }
                                         }
 
                                         footballManager.playerAnalyzer.playerComparison(player1, player2);
                                         break;
                                     }
                                     case 2: {
+                                        //Ranking Top N
 
                                         break;
                                     }
                                     case 3: {
+                                        //Position-based Analysis
                                         break;
                                     }
                                     case 0: {
+                                        //Back to Main Menu
+                                        analysisContinue = false;
                                         break;
                                     }
                                     default: {
