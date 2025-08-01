@@ -25,7 +25,7 @@ public class Player {
     private int crossing; //crossing
     private int tackling; //tackling
     private int heading; //heading
-    private int ballControl; //ball control
+    private int ballControl; //First Touch
 
     //Mental Skills //FM 2025 stats name
     private int vision; //vision
