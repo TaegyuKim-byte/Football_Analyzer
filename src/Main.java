@@ -239,7 +239,23 @@ public class Main {
                                     }
                                     case 2: {
                                         //Ranking Top N
+                                        System.out.println("\n----- Ranking Top N -----");
+                                        System.out.println("(1) Position-based Ranking");
+                                        System.out.println("(2) Stats-based Ranking");
+                                        System.out.println("(0) Back to Analysis Menu");
+                                        int rankingChoice = -1;
+                                        System.out.print("Enter the ranking choice: ");
+                                        rankingChoice = keyboard.nextInt();
+                                        keyboard.nextLine();
+                                        //개행문자 제거
 
+                                        while (rankingChoice < 0 || rankingChoice > 2) {
+                                            System.out.print("Enter the ranking choice between 0 and 2: ");
+                                            rankingChoice = keyboard.nextInt();
+                                            keyboard.nextLine();
+                                            //개행문자 제거
+                                        }
+                                        footballManager.playerAnalyzer.rankingTopN(rankingChoice);
                                         break;
                                     }
                                     case 3: {

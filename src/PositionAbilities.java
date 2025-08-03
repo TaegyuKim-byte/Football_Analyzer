@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
+//포지션 기반 스파이더 차트 비교를 위한 클래스. 조금 과하지 않나.. 라는 생각은 들긴 함. 겨우 이거 하나 때문에 클래스를 만든다라..
 public class PositionAbilities {
     private static final Map<Position, String[]> positionAbilities = new HashMap<>();
     
@@ -50,6 +51,7 @@ public class PositionAbilities {
         System.out.println("14. GK (Goalkeeper)");
     }
     
+    //포지션 선택 메뉴에서 선택한 포지션을 반환.
     public static Position getPositionByChoice(int choice) {
         switch (choice) {
             case 1: return Position.ST;

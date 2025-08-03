@@ -16,7 +16,7 @@ public class FootballManager {
         teams = new ArrayList<>();
         leagues = new ArrayList<>();
 
-        playerAnalyzer = new PlayerAnalyzer();
+        playerAnalyzer = new PlayerAnalyzer(players, teams, leagues);
         teamAnalyzer = new TeamAnalyzer();
     }
 
@@ -180,4 +180,5 @@ public class FootballManager {
     }
 
     //Analyzer들을 실행하기 위한 FM의 메서드도 만들어줘야 함.
+    //ㄴㄴ 그냥 footballManager.playerAnalyzer.(); 이렇게 하면 됨.
 }
