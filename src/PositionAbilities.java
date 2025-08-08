@@ -2,9 +2,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 //포지션 기반 스파이더 차트 비교를 위한 클래스. 조금 과하지 않나.. 라는 생각은 들긴 함. 겨우 이거 하나 때문에 클래스를 만든다라..
+//그런데 포지션 기반 Ranking을 매길 때 이 클래스를 사용하게 되었음
+//생각외로 더 쓸 데가 있었잖아!
 public class PositionAbilities {
     private static final Map<Position, String[]> positionAbilities = new HashMap<>();
     
+    //사실 얘도 인버티드 여부에 따라 좀 더 나뉘어야 하는데.. 흠
     static {
         // 공격수 (ST, LW, RW)
         positionAbilities.put(Position.ST, new String[]{"Shooting", "Pace", "Off The Ball", "Composure", "Ball Control", "Strength"});

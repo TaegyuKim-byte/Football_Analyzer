@@ -3,6 +3,8 @@ import javax.swing.SwingUtilities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
+import java.util.Map;
+import java.util.LinkedHashMap;
 
 public class PlayerAnalyzer {
     //footballManager가 가지고 있는 플레이어 데이터 저장
@@ -36,10 +38,11 @@ public class PlayerAnalyzer {
         System.out.println("----- Player Analysis Options -----");
         System.out.println("(1) Player Comparison");
         System.out.println("(2) Ranking Top N");
-        System.out.println("(3) Position-based Analysis");
+        System.out.println("(3) Player's Strength and Weakness");
         System.out.println("(0) Back to Analysis Menu");
     }
 
+    //### 1번 기능
     //플레이어 비교 메뉴 1. 단순 능력치 나열 2. 스파이더 차트 비교
     public void playerComparison(Player player1, Player player2) {
         System.out.println("----- Player Comparison -----");
@@ -68,7 +71,7 @@ public class PlayerAnalyzer {
                 compareAbility("Composure", player1.getComposure(), player2.getComposure());
                 compareAbility("Decision Making", player1.getDecisionMaking(), player2.getDecisionMaking());
                 compareAbility("Work Rate", player1.getWorkRate(), player2.getWorkRate());
-                compareAbility("Work Rate", player1.getLeadership(), player2.getLeadership());
+                compareAbility("Leadership", player1.getLeadership(), player2.getLeadership());
                 compareAbility("Positioning", player1.getPositioning(), player2.getPositioning());   
 
                 System.out.println("-------------- Physical Skills --------------");
@@ -127,6 +130,7 @@ public class PlayerAnalyzer {
         });
     }
 
+    //### 2번 기능
     //상위 N명 랭킹 표시
     public void rankingTopN(int rankingChoice) {
         switch (rankingChoice) {
@@ -178,7 +182,53 @@ public class PlayerAnalyzer {
             }
             case 2: {
                 //Stats-based Ranking
+                //능력치 선택 메뉴
+                System.out.println("----- Stats-based Ranking -----");
+                System.out.println("Choose the ability you want to rank! ");
+                for (String ability : abilities) {
+                    System.out.println(ability);
+                }
+                System.out.print("Enter the ability number you want to rank: ");
+                int abilityNumber = keyboard.nextInt();
+                keyboard.nextLine();
+                //개행문자 제거
+
+                //능력치 번호 범위 체크
+                if (abilityNumber < 1 || abilityNumber > 21) {
+                    System.out.println("[!] Invalid ability choice!");
+                    return;
+                }
+
+                //랭킹할 선수 수 입력
+                System.out.print("Enter the number of players you want to rank: ");
+                int numberOfPlayers = keyboard.nextInt();
+                while (numberOfPlayers < 0) {
+                    System.out.print("Enter the number of players you want to rank: ");
+                    numberOfPlayers = keyboard.nextInt();
+                    keyboard.nextLine();
+                    //개행문자 제거
+                }
+
+                //선수 리스트 복사 (원본 침해 방지지)
+                List<Player> sortedPlayers = new ArrayList<>(players);
+
+                //선수 정렬 (능력치 번호에 따라 정렬)
+                Collections.sort(sortedPlayers, (p1, p2) -> {
+                    int value1 = getAbilitybyNumber(p1, abilityNumber);
+                    int value2 = getAbilitybyNumber(p2, abilityNumber);
+                    return Integer.compare(value2, value1);
+                });
                 
+                //출력
+                System.out.println("\n----- Stats-based Ranking -----");
+                System.out.println("Selected ability: " + abilities[abilityNumber - 1]);
+                System.out.println("Number of players to rank: " + numberOfPlayers);
+
+                for (int i = 0; i < Math.min(numberOfPlayers, sortedPlayers.size()); i++) {
+                    Player player = sortedPlayers.get(i);
+                    System.out.printf("%d. %s - %d\n", i + 1, player.getName(), getAbilitybyNumber(player, abilityNumber));
+                }
+
                 break;
             }    
             case 0: {
@@ -193,10 +243,83 @@ public class PlayerAnalyzer {
 
         return;
     }
-    
-    public void positionBasedAnalysis() {
-    
+
+    //능력치 번호에 따라 능력치 값 반환
+    public int getAbilitybyNumber(Player player, int abilityNumber) {
+        switch (abilityNumber) {
+            case 1: return player.getShooting();
+            case 2: return player.getPassing();
+            case 3: return player.getDribbling();
+            case 4: return player.getCrossing();
+            case 5: return player.getTackling();
+            case 6: return player.getHeading();
+            case 7: return player.getBallControl();
+            case 8: return player.getVision();
+            case 9: return player.getComposure();
+            case 10: return player.getDecisionMaking();
+            case 11: return player.getWorkRate();
+            case 12: return player.getLeadership();
+            case 13: return player.getPositioning();
+            case 14: return player.getOffTheBall();
+            case 15: return player.getPace();
+            case 16: return player.getStamina();
+            case 17: return player.getStrength();
+            case 18: return player.getJumping();
+            case 19: return player.getAgility();
+            case 20: return player.getSaving();
+            case 21: return player.getBuildupPlay();
+            default: return 0;
+        }
     }
     
+    //### 3번 기능
+    //플레이어의 강점 약점 분석
+    public void strengthAndWeaknessAnalysis(Player player) {
+        System.out.println("----- Player's Strength and Weakness -----");
+        
+        //Map 사용..?
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+        map.put("Shooting", player.getShooting());
+        map.put("Passing", player.getPassing());
+        map.put("Dribbling", player.getDribbling());
+        map.put("Crossing", player.getCrossing());
+        map.put("Tackling", player.getTackling());
+        map.put("Heading", player.getHeading());
+        map.put("Ball Control", player.getBallControl());
+        map.put("Vision", player.getVision());
+        map.put("Composure", player.getComposure());
+        map.put("Decision Making", player.getDecisionMaking());
+        map.put("Work Rate", player.getWorkRate());
+        map.put("Leadership", player.getLeadership());
+        map.put("Positioning", player.getPositioning());
+        map.put("Off the Ball", player.getOffTheBall());
+        map.put("Pace", player.getPace());
+        map.put("Stamina", player.getStamina());
+        map.put("Strength", player.getStrength());
+        map.put("Jumping", player.getJumping());
+        map.put("Agility", player.getAgility());
+        
+        //GK 포지션인 경우 추가
+        if (player.getPreferredPosition() == Position.GK) {
+            map.put("Saving", player.getSaving());
+            map.put("Buildup Play", player.getBuildupPlay());
+        }
+
+        //Map 정렬
+        System.out.printf("----- Player" + player.getName() + "'s Strength -----\n");
+        System.out.println("------------------------------------------");
+        map.entrySet().stream()
+            .sorted((e1, e2) -> Integer.compare(e2.getValue(), e1.getValue()))
+            .limit(4)
+            .forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue()));
+
+        //Map 정렬
+        System.out.printf("----- Player" + player.getName() + "'s Weakness -----\n");
+        System.out.println("------------------------------------------");
+        map.entrySet().stream()
+            .sorted((e1, e2) -> Integer.compare(e1.getValue(), e2.getValue()))
+            .limit(4)
+            .forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue()));
+    }
     
 }

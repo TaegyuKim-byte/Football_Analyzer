@@ -259,7 +259,19 @@ public class Main {
                                         break;
                                     }
                                     case 3: {
-                                        //Position-based Analysis
+                                        //Player's Strength and Weakness Analysis
+                                        footballManager.showAllPlayers();
+                                        System.out.println("Enter the player's name: ");
+                                        String playerName = keyboard.nextLine();
+                                        Player player = footballManager.findPlayerByName(playerName);
+                                        while (player == null) {
+                                            System.out.println("[!] There is no player whose name is " + playerName);
+                                            System.out.println("Enter the player's name: ");
+                                            playerName = keyboard.nextLine();
+                                            player = footballManager.findPlayerByName(playerName);
+                                        }
+
+                                        footballManager.playerAnalyzer.strengthAndWeaknessAnalysis(player);
                                         break;
                                     }
                                     case 0: {
