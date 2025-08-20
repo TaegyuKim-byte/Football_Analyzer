@@ -298,15 +298,57 @@ public class Main {
 
                                 switch (teamAnalysisChoice) {
                                     case 1: {
+                                        //Best 11 Auto Formation
+                                        System.out.print("Enter the team's name: ");
+                                        String teamName = keyboard.nextLine();
+                                        Team team = footballManager.findTeamByName(teamName);
+                                        while (team == null) {
+                                            System.out.println("[!] There is no team whose name is " + teamName);
+                                            System.out.print("Enter the team's name: ");
+                                            teamName = keyboard.nextLine();
+                                            team = footballManager.findTeamByName(teamName);
+                                        }
+
+                                        // 포메이션 선택
+                                        Formation.showFormationMenu();
+                                        System.out.print("Enter the formation choice (1-4): ");
+                                        int formationChoice = keyboard.nextInt();
+                                        keyboard.nextLine();
                                         
+                                        while (formationChoice < 1 || formationChoice > 4) {
+                                            System.out.print("Enter the formation choice between 1 and 4: ");
+                                            formationChoice = keyboard.nextInt();
+                                            keyboard.nextLine();
+                                        }
+                                        
+                                        Formation selectedFormation = Formation.getFormationByChoice(formationChoice);
+                                        if (selectedFormation != null) {
+                                            System.out.println("Selected formation: " + selectedFormation.getName());
+                                                footballManager.teamAnalyzer.best11AutoFormation(team, selectedFormation);
+                                        } else {
+                                            System.out.println("[!] Invalid formation choice!");
+                                        }
+                                        break;
                                     } 
                                     case 2: {
-
+                                        //Team Average Stats
+                                        System.out.print("Enter the team's name: ");
+                                        String teamName = keyboard.nextLine();
+                                        Team team = footballManager.findTeamByName(teamName);
+                                        while (team == null) {
+                                            System.out.println("[!] There is no team whose name is " + teamName);
+                                            System.out.print("Enter the team's name: ");
+                                            teamName = keyboard.nextLine();
+                                            team = footballManager.findTeamByName(teamName);
+                                        }
+                                        footballManager.teamAnalyzer.teamAverageStats(team);
                                     }
                                     case 3: {
-
+                                        //Formation Suitability
+                                        
                                     }
                                     case 0: {
+                                        analysisContinue = false;
                                         break;
                                     }
                                     default: {

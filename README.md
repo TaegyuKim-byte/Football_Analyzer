@@ -18,6 +18,7 @@
 - Team analysis
     - Creating a best XI
     - Calculating team's average stat
+        - Attack, Midfield, Defense, Tactical Flexibility
     - Analyzing formation fit
 
 *It may be updated later*

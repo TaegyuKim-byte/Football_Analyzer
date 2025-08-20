@@ -291,7 +291,7 @@ public class Player {
         for (Position pos : Position.values()) {
             double fitscore = evaluatePositionFit(pos);
             if (pos == preferredPosition) {
-                fitscore *= 1.05;
+                fitscore *= 1.2;
             }
             this.positionFitEnumMap.put(pos, fitscore);
         }

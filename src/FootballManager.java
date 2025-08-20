@@ -17,7 +17,7 @@ public class FootballManager {
         leagues = new ArrayList<>();
 
         playerAnalyzer = new PlayerAnalyzer(players, teams, leagues);
-        teamAnalyzer = new TeamAnalyzer();
+        teamAnalyzer = new TeamAnalyzer(players, teams, leagues);
     }
 
     public ArrayList<League> getLeagues() {
